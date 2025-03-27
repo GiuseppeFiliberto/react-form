@@ -32,13 +32,19 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setArticlesList([...articlesList, title])
+    setArticlesList([...articlesList, { title: title, id: articlesList.length + 1 }])
   }
 
   return (
     <>
       <form className='d-flex' onSubmit={handleSubmit}>
-        <input value={title} oncChange={handleChange} type='text' placeholder='Insert new article' />
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Title"
+          value={title}
+          onChange={handleChange}
+        />
         <button
           type="submit"
           className="btn btn-primary"
@@ -48,14 +54,15 @@ function App() {
 
       </form>
       <div className="d-flex">
-        <div className="card p-4">
-          {articlesList.map((article) => (
+
+        {articlesList.map((article) => (
+          <div className="card p-4 m-3">
             <div key={article.id}>
               <h2>{article.title}</h2>
-              <p>{article.content}</p>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+
       </div>
     </>
   )
