@@ -30,10 +30,15 @@ function App() {
     setTitle(e.target.value)
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setArticlesList([...articlesList, title])
+  }
+
   return (
     <>
-      <form className='d-flex'>
-        <input type='text' placeholder='Search' />
+      <form className='d-flex' onSubmit={handleSubmit}>
+        <input value={title} oncChange={handleChange} type='text' placeholder='Insert new article' />
         <button
           type="submit"
           className="btn btn-primary"
@@ -44,7 +49,7 @@ function App() {
       </form>
       <div className="d-flex">
         <div className="card p-4">
-          {articles.map((article) => (
+          {articlesList.map((article) => (
             <div key={article.id}>
               <h2>{article.title}</h2>
               <p>{article.content}</p>
